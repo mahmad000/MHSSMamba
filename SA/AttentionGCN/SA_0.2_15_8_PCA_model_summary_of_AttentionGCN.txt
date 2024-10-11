@@ -1,0 +1,170 @@
+Model: "AttentionGCN"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input (InputLayer)          [(None, 8, 8, 15)]           0         []                            
+                                                                                                  
+ conv1 (Conv2D)              (None, 8, 8, 8)              128       ['input[0][0]']               
+                                                                                                  
+ zero_padding2d (ZeroPaddin  (None, 10, 10, 8)            0         ['conv1[0][0]']               
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_30 (Conv2D)          (None, 8, 8, 8)              144       ['zero_padding2d[0][0]']      
+                                                                                                  
+ batch_normalization (Batch  (None, 8, 8, 8)              32        ['conv2d_30[0][0]']           
+ Normalization)                                                                                   
+                                                                                                  
+ activation_66 (Activation)  (None, 8, 8, 8)              0         ['batch_normalization[0][0]'] 
+                                                                                                  
+ concatenate_3 (Concatenate  (None, 8, 8, 16)             0         ['conv1[0][0]',               
+ )                                                                   'activation_66[0][0]']       
+                                                                                                  
+ conv2d_31 (Conv2D)          (None, 8, 8, 4)              64        ['concatenate_3[0][0]']       
+                                                                                                  
+ batch_normalization_1 (Bat  (None, 8, 8, 4)              16        ['conv2d_31[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_67 (Activation)  (None, 8, 8, 4)              0         ['batch_normalization_1[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_32 (Conv2D)          (None, 8, 8, 9)              45        ['activation_67[0][0]']       
+                                                                                                  
+ conv2d_33 (Conv2D)          (None, 8, 8, 8)              64        ['conv1[0][0]']               
+                                                                                                  
+ group_normalization (Group  (None, 8, 8, 9)              18        ['conv2d_32[0][0]']           
+ Normalization)                                                                                   
+                                                                                                  
+ batch_normalization_2 (Bat  (None, 8, 8, 8)              32        ['conv2d_33[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ tf.reshape (TFOpLambda)     (None, 8, 8, 1, 9)           0         ['group_normalization[0][0]'] 
+                                                                                                  
+ compatible_extract_patches  (None, 8, 8, 72)             0         ['batch_normalization_2[0][0]'
+  (CompatibleExtractPatches                                         ]                             
+ )                                                                                                
+                                                                                                  
+ tf.compat.v1.transpose (TF  (None, 8, 8, 9, 1)           0         ['tf.reshape[0][0]']          
+ OpLambda)                                                                                        
+                                                                                                  
+ tf.reshape_1 (TFOpLambda)   (None, 8, 8, 9, 8, 1)        0         ['compatible_extract_patches[0
+                                                                    ][0]']                        
+                                                                                                  
+ tf.expand_dims (TFOpLambda  (None, 8, 8, 9, 1, 1)        0         ['tf.compat.v1.transpose[0][0]
+ )                                                                  ']                            
+                                                                                                  
+ multiply (Multiply)         (None, 8, 8, 9, 8, 1)        0         ['tf.reshape_1[0][0]',        
+                                                                     'tf.expand_dims[0][0]']      
+                                                                                                  
+ tf.math.reduce_sum (TFOpLa  (None, 8, 8, 8, 1)           0         ['multiply[0][0]']            
+ mbda)                                                                                            
+                                                                                                  
+ tf.reshape_2 (TFOpLambda)   (None, 8, 8, 8)              0         ['tf.math.reduce_sum[0][0]']  
+                                                                                                  
+ batch_normalization_3 (Bat  (None, 8, 8, 8)              32        ['tf.reshape_2[0][0]']        
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_68 (Activation)  (None, 8, 8, 8)              0         ['batch_normalization_3[0][0]'
+                                                                    ]                             
+                                                                                                  
+ add_24 (Add)                (None, 8, 8, 8)              0         ['activation_68[0][0]',       
+                                                                     'activation_66[0][0]']       
+                                                                                                  
+ reshape_6 (Reshape)         (None, 8, 64)                0         ['conv1[0][0]']               
+                                                                                                  
+ tf.math.reduce_mean (TFOpL  (None, 1, 1, 8)              0         ['add_24[0][0]']              
+ ambda)                                                                                           
+                                                                                                  
+ squeezer (Conv1D)           (None, 8, 16)                1040      ['reshape_6[0][0]']           
+                                                                                                  
+ conv2d_34 (Conv2D)          (None, 1, 1, 32)             288       ['tf.math.reduce_mean[0][0]'] 
+                                                                                                  
+ reshape_7 (Reshape)         (None, 8, 16)                0         ['squeezer[0][0]']            
+                                                                                                  
+ batch_normalization_4 (Bat  (None, 1, 1, 32)             128       ['conv2d_34[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ gconv (Conv1D)              (None, 8, 64)                1088      ['reshape_7[0][0]']           
+                                                                                                  
+ activation_69 (Activation)  (None, 1, 1, 32)             0         ['batch_normalization_4[0][0]'
+                                                                    ]                             
+                                                                                                  
+ reshape_8 (Reshape)         (None, 8, 64)                0         ['gconv[0][0]']               
+                                                                                                  
+ conv2d_35 (Conv2D)          (None, 1, 1, 16)             528       ['activation_69[0][0]']       
+                                                                                                  
+ unsqueezer (Conv1D)         (None, 8, 64)                4160      ['reshape_8[0][0]']           
+                                                                                                  
+ tf.expand_dims_1 (TFOpLamb  (None, 8, 8, 8, 1)           0         ['activation_68[0][0]']       
+ da)                                                                                              
+                                                                                                  
+ tf.expand_dims_2 (TFOpLamb  (None, 8, 8, 8, 1)           0         ['activation_66[0][0]']       
+ da)                                                                                              
+                                                                                                  
+ tf.reshape_3 (TFOpLambda)   (None, 1, 1, 8, 2)           0         ['conv2d_35[0][0]']           
+                                                                                                  
+ reshape_9 (Reshape)         (None, 64, 8)                0         ['unsqueezer[0][0]']          
+                                                                                                  
+ concatenate_4 (Concatenate  (None, 8, 8, 8, 2)           0         ['tf.expand_dims_1[0][0]',    
+ )                                                                   'tf.expand_dims_2[0][0]']    
+                                                                                                  
+ softmax (Softmax)           (None, 1, 1, 8, 2)           0         ['tf.reshape_3[0][0]']        
+                                                                                                  
+ reshape_10 (Reshape)        (None, 8, 8, 8)              0         ['reshape_9[0][0]']           
+                                                                                                  
+ multiply_1 (Multiply)       (None, 8, 8, 8, 2)           0         ['concatenate_4[0][0]',       
+                                                                     'softmax[0][0]']             
+                                                                                                  
+ concatenate_5 (Concatenate  (None, 8, 8, 16)             0         ['conv1[0][0]',               
+ )                                                                   'reshape_10[0][0]']          
+                                                                                                  
+ tf.math.reduce_sum_1 (TFOp  (None, 8, 8, 8)              0         ['multiply_1[0][0]']          
+ Lambda)                                                                                          
+                                                                                                  
+ concatenate_6 (Concatenate  (None, 8, 8, 32)             0         ['conv1[0][0]',               
+ )                                                                   'concatenate_5[0][0]',       
+                                                                     'tf.math.reduce_sum_1[0][0]']
+                                                                                                  
+ conv2 (Conv2D)              (None, 8, 8, 32)             1056      ['concatenate_6[0][0]']       
+                                                                                                  
+ reshape_11 (Reshape)        (None, 32, 64)               0         ['conv2[0][0]']               
+                                                                                                  
+ squeezer2 (Conv1D)          (None, 32, 64)               4160      ['reshape_11[0][0]']          
+                                                                                                  
+ reshape_12 (Reshape)        (None, 64, 32)               0         ['squeezer2[0][0]']           
+                                                                                                  
+ gconv2 (Conv1D)             (None, 64, 32)               1056      ['reshape_12[0][0]']          
+                                                                                                  
+ reshape_13 (Reshape)        (None, 64, 32)               0         ['gconv2[0][0]']              
+                                                                                                  
+ unsqueezer2 (Conv1D)        (None, 64, 64)               2112      ['reshape_13[0][0]']          
+                                                                                                  
+ reshape_14 (Reshape)        (None, 64, 64)               0         ['unsqueezer2[0][0]']         
+                                                                                                  
+ reshape_15 (Reshape)        (None, 8, 8, 64)             0         ['reshape_14[0][0]']          
+                                                                                                  
+ concatenate_7 (Concatenate  (None, 8, 8, 96)             0         ['conv2[0][0]',               
+ )                                                                   'reshape_15[0][0]']          
+                                                                                                  
+ concatenate_8 (Concatenate  (None, 8, 8, 136)            0         ['conv2[0][0]',               
+ )                                                                   'concatenate_7[0][0]',       
+                                                                     'tf.math.reduce_sum_1[0][0]']
+                                                                                                  
+ conv3 (Conv2D)              (None, 8, 8, 32)             4384      ['concatenate_8[0][0]']       
+                                                                                                  
+ conv4 (Conv2D)              (None, 6, 6, 64)             18496     ['conv3[0][0]']               
+                                                                                                  
+ conv5 (Conv2D)              (None, 6, 6, 128)            8320      ['conv4[0][0]']               
+                                                                                                  
+ flatten_6 (Flatten)         (None, 4608)                 0         ['conv5[0][0]']               
+                                                                                                  
+ fc1 (Dense)                 (None, 100)                  460900    ['flatten_6[0][0]']           
+                                                                                                  
+ fc2 (Dense)                 (None, 20)                   2020      ['fc1[0][0]']                 
+                                                                                                  
+ fc3 (Dense)                 (None, 16)                   336       ['fc2[0][0]']                 
+                                                                                                  
+==================================================================================================
+Total params: 510647 (1.95 MB)
+Trainable params: 510527 (1.95 MB)
+Non-trainable params: 120 (480.00 Byte)
+__________________________________________________________________________________________________

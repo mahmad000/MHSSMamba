@@ -1,0 +1,52 @@
+Model: "IN3D"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_7 (InputLayer)        [(None, 8, 8, 15, 1)]        0         []                            
+                                                                                                  
+ conv3d_81 (Conv3D)          (None, 8, 8, 15, 30)         5280      ['input_7[0][0]']             
+                                                                                                  
+ conv3d_84 (Conv3D)          (None, 8, 8, 15, 40)         7040      ['input_7[0][0]']             
+                                                                                                  
+ conv3d_87 (Conv3D)          (None, 8, 8, 15, 60)         10560     ['input_7[0][0]']             
+                                                                                                  
+ conv3d_82 (Conv3D)          (None, 8, 8, 15, 20)         27020     ['conv3d_81[0][0]']           
+                                                                                                  
+ conv3d_85 (Conv3D)          (None, 8, 8, 15, 20)         36020     ['conv3d_84[0][0]']           
+                                                                                                  
+ conv3d_88 (Conv3D)          (None, 8, 8, 15, 30)         81030     ['conv3d_87[0][0]']           
+                                                                                                  
+ conv3d_83 (Conv3D)          (None, 8, 8, 15, 10)         5410      ['conv3d_82[0][0]']           
+                                                                                                  
+ conv3d_86 (Conv3D)          (None, 8, 8, 15, 10)         5410      ['conv3d_85[0][0]']           
+                                                                                                  
+ conv3d_89 (Conv3D)          (None, 8, 8, 15, 10)         8110      ['conv3d_88[0][0]']           
+                                                                                                  
+ concatenate_1 (Concatenate  (None, 8, 8, 45, 10)         0         ['conv3d_83[0][0]',           
+ )                                                                   'conv3d_86[0][0]',           
+                                                                     'conv3d_89[0][0]']           
+                                                                                                  
+ conv3d_90 (Conv3D)          (None, 8, 8, 45, 128)        1408      ['concatenate_1[0][0]']       
+                                                                                                  
+ flatten_4 (Flatten)         (None, 368640)               0         ['conv3d_90[0][0]']           
+                                                                                                  
+ dense_26 (Dense)            (None, 512)                  1887441   ['flatten_4[0][0]']           
+                                                          92                                      
+                                                                                                  
+ dropout_7 (Dropout)         (None, 512)                  0         ['dense_26[0][0]']            
+                                                                                                  
+ dense_27 (Dense)            (None, 128)                  65664     ['dropout_7[0][0]']           
+                                                                                                  
+ dropout_8 (Dropout)         (None, 128)                  0         ['dense_27[0][0]']            
+                                                                                                  
+ dense_28 (Dense)            (None, 64)                   8256      ['dropout_8[0][0]']           
+                                                                                                  
+ dropout_9 (Dropout)         (None, 64)                   0         ['dense_28[0][0]']            
+                                                                                                  
+ dense_29 (Dense)            (None, 16)                   1040      ['dropout_9[0][0]']           
+                                                                                                  
+==================================================================================================
+Total params: 189006440 (721.00 MB)
+Trainable params: 189006440 (721.00 MB)
+Non-trainable params: 0 (0.00 Byte)
+__________________________________________________________________________________________________

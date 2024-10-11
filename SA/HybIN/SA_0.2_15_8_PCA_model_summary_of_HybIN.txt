@@ -1,0 +1,84 @@
+Model: "HybIN"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_8 (InputLayer)        [(None, 8, 8, 15, 1)]        0         []                            
+                                                                                                  
+ conv3d_91 (Conv3D)          (None, 8, 8, 15, 30)         5280      ['input_8[0][0]']             
+                                                                                                  
+ conv3d_94 (Conv3D)          (None, 8, 8, 15, 40)         7040      ['input_8[0][0]']             
+                                                                                                  
+ conv3d_97 (Conv3D)          (None, 8, 8, 15, 60)         10560     ['input_8[0][0]']             
+                                                                                                  
+ conv3d_92 (Conv3D)          (None, 8, 8, 15, 20)         27020     ['conv3d_91[0][0]']           
+                                                                                                  
+ conv3d_95 (Conv3D)          (None, 8, 8, 15, 20)         36020     ['conv3d_94[0][0]']           
+                                                                                                  
+ conv3d_98 (Conv3D)          (None, 8, 8, 15, 30)         81030     ['conv3d_97[0][0]']           
+                                                                                                  
+ conv3d_93 (Conv3D)          (None, 8, 8, 15, 10)         5410      ['conv3d_92[0][0]']           
+                                                                                                  
+ conv3d_96 (Conv3D)          (None, 8, 8, 15, 10)         5410      ['conv3d_95[0][0]']           
+                                                                                                  
+ conv3d_99 (Conv3D)          (None, 8, 8, 15, 10)         8110      ['conv3d_98[0][0]']           
+                                                                                                  
+ reshape_3 (Reshape)         (None, 8, 8, 150)            0         ['conv3d_93[0][0]']           
+                                                                                                  
+ reshape_4 (Reshape)         (None, 8, 8, 150)            0         ['conv3d_96[0][0]']           
+                                                                                                  
+ reshape_5 (Reshape)         (None, 8, 8, 150)            0         ['conv3d_99[0][0]']           
+                                                                                                  
+ max_pooling2d_5 (MaxPoolin  (None, 8, 8, 150)            0         ['reshape_3[0][0]']           
+ g2D)                                                                                             
+                                                                                                  
+ max_pooling2d_6 (MaxPoolin  (None, 8, 8, 150)            0         ['reshape_4[0][0]']           
+ g2D)                                                                                             
+                                                                                                  
+ max_pooling2d_7 (MaxPoolin  (None, 8, 8, 150)            0         ['reshape_5[0][0]']           
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_20 (Conv2D)          (None, 8, 8, 16)             2416      ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ conv2d_23 (Conv2D)          (None, 8, 8, 16)             2416      ['max_pooling2d_6[0][0]']     
+                                                                                                  
+ conv2d_26 (Conv2D)          (None, 8, 8, 16)             2416      ['max_pooling2d_7[0][0]']     
+                                                                                                  
+ conv2d_21 (Conv2D)          (None, 8, 8, 32)             544       ['conv2d_20[0][0]']           
+                                                                                                  
+ conv2d_24 (Conv2D)          (None, 8, 8, 32)             544       ['conv2d_23[0][0]']           
+                                                                                                  
+ conv2d_27 (Conv2D)          (None, 8, 8, 32)             544       ['conv2d_26[0][0]']           
+                                                                                                  
+ conv2d_22 (Conv2D)          (None, 8, 8, 64)             2112      ['conv2d_21[0][0]']           
+                                                                                                  
+ conv2d_25 (Conv2D)          (None, 8, 8, 64)             2112      ['conv2d_24[0][0]']           
+                                                                                                  
+ conv2d_28 (Conv2D)          (None, 8, 8, 64)             2112      ['conv2d_27[0][0]']           
+                                                                                                  
+ concatenate_2 (Concatenate  (None, 8, 8, 192)            0         ['conv2d_22[0][0]',           
+ )                                                                   'conv2d_25[0][0]',           
+                                                                     'conv2d_28[0][0]']           
+                                                                                                  
+ conv2d_29 (Conv2D)          (None, 8, 8, 128)            24704     ['concatenate_2[0][0]']       
+                                                                                                  
+ flatten_5 (Flatten)         (None, 8192)                 0         ['conv2d_29[0][0]']           
+                                                                                                  
+ dense_30 (Dense)            (None, 512)                  4194816   ['flatten_5[0][0]']           
+                                                                                                  
+ dropout_10 (Dropout)        (None, 512)                  0         ['dense_30[0][0]']            
+                                                                                                  
+ dense_31 (Dense)            (None, 128)                  65664     ['dropout_10[0][0]']          
+                                                                                                  
+ dropout_11 (Dropout)        (None, 128)                  0         ['dense_31[0][0]']            
+                                                                                                  
+ dense_32 (Dense)            (None, 64)                   8256      ['dropout_11[0][0]']          
+                                                                                                  
+ dropout_12 (Dropout)        (None, 64)                   0         ['dense_32[0][0]']            
+                                                                                                  
+ dense_33 (Dense)            (None, 16)                   1040      ['dropout_12[0][0]']          
+                                                                                                  
+==================================================================================================
+Total params: 4495576 (17.15 MB)
+Trainable params: 4495576 (17.15 MB)
+Non-trainable params: 0 (0.00 Byte)
+__________________________________________________________________________________________________
