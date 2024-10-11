@@ -1,0 +1,46 @@
+Model: "IN2D"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_5 (InputLayer)        [(None, 8, 8, 15)]           0         []                            
+                                                                                                  
+ conv2d_11 (Conv2D)          (None, 8, 8, 30)             480       ['input_5[0][0]']             
+                                                                                                  
+ conv2d_14 (Conv2D)          (None, 8, 8, 40)             640       ['input_5[0][0]']             
+                                                                                                  
+ max_pooling2d_4 (MaxPoolin  (None, 8, 8, 15)             0         ['input_5[0][0]']             
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_12 (Conv2D)          (None, 8, 8, 20)             620       ['conv2d_11[0][0]']           
+                                                                                                  
+ conv2d_15 (Conv2D)          (None, 8, 8, 20)             820       ['conv2d_14[0][0]']           
+                                                                                                  
+ conv2d_17 (Conv2D)          (None, 8, 8, 20)             320       ['max_pooling2d_4[0][0]']     
+                                                                                                  
+ conv2d_13 (Conv2D)          (None, 8, 8, 10)             1810      ['conv2d_12[0][0]']           
+                                                                                                  
+ conv2d_16 (Conv2D)          (None, 8, 8, 10)             5010      ['conv2d_15[0][0]']           
+                                                                                                  
+ conv2d_18 (Conv2D)          (None, 8, 8, 10)             210       ['conv2d_17[0][0]']           
+                                                                                                  
+ concatenate (Concatenate)   (None, 8, 8, 30)             0         ['conv2d_13[0][0]',           
+                                                                     'conv2d_16[0][0]',           
+                                                                     'conv2d_18[0][0]']           
+                                                                                                  
+ conv2d_19 (Conv2D)          (None, 8, 8, 128)            3968      ['concatenate[0][0]']         
+                                                                                                  
+ flatten_3 (Flatten)         (None, 8192)                 0         ['conv2d_19[0][0]']           
+                                                                                                  
+ dense_21 (Dense)            (None, 1200)                 9831600   ['flatten_3[0][0]']           
+                                                                                                  
+ dense_22 (Dense)            (None, 600)                  720600    ['dense_21[0][0]']            
+                                                                                                  
+ dense_23 (Dense)            (None, 150)                  90150     ['dense_22[0][0]']            
+                                                                                                  
+ dense_24 (Dense)            (None, 9)                    1359      ['dense_23[0][0]']            
+                                                                                                  
+==================================================================================================
+Total params: 10657587 (40.66 MB)
+Trainable params: 10657587 (40.66 MB)
+Non-trainable params: 0 (0.00 Byte)
+__________________________________________________________________________________________________

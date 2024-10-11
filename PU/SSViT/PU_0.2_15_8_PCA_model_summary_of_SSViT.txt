@@ -1,0 +1,92 @@
+Model: "SSViT"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ inputs (InputLayer)         [(None, 8, 8, 15)]           0         []                            
+                                                                                                  
+ tf.expand_dims_4 (TFOpLamb  (None, 1, 8, 8, 15)          0         ['inputs[0][0]']              
+ da)                                                                                              
+                                                                                                  
+ patch_embed (Conv3D)        (None, 1, 1, 1, 64)          61504     ['tf.expand_dims_4[0][0]']    
+                                                                                                  
+ tf.compat.v1.shape_1 (TFOp  (5,)                         0         ['patch_embed[0][0]']         
+ Lambda)                                                                                          
+                                                                                                  
+ tf.__operators__.getitem_7  ()                           0         ['tf.compat.v1.shape_1[0][0]']
+  (SlicingOpLambda)                                                                               
+                                                                                                  
+ tf.broadcast_to_1 (TFOpLam  (None, 1, 1, 1, 64)          0         ['tf.__operators__.getitem_7[0
+ bda)                                                               ][0]']                        
+                                                                                                  
+ tf.concat_2 (TFOpLambda)    (None, 2, 1, 1, 64)          0         ['tf.broadcast_to_1[0][0]',   
+                                                                     'patch_embed[0][0]']         
+                                                                                                  
+ tf.__operators__.add_1 (TF  (None, 2, 1, 2, 64)          0         ['tf.concat_2[0][0]']         
+ OpLambda)                                                                                        
+                                                                                                  
+ transformer_layer_0 (Trans  (None, 2, 1, 2, 64)          166016    ['tf.__operators__.add_1[0][0]
+ former_SSViT)                                                      ']                            
+                                                                                                  
+ transformer_layer_1 (Trans  (None, 2, 1, 2, 64)          166016    ['transformer_layer_0[0][0]'] 
+ former_SSViT)                                                                                    
+                                                                                                  
+ transformer_layer_2 (Trans  (None, 2, 1, 2, 64)          166016    ['transformer_layer_1[0][0]'] 
+ former_SSViT)                                                                                    
+                                                                                                  
+ transformer_layer_3 (Trans  (None, 2, 1, 2, 64)          166016    ['transformer_layer_2[0][0]'] 
+ former_SSViT)                                                                                    
+                                                                                                  
+ tf.__operators__.getitem_8  (None, 64)                   0         ['transformer_layer_3[0][0]'] 
+  (SlicingOpLambda)                                                                               
+                                                                                                  
+ dense_53 (Dense)            (None, 64)                   4160      ['tf.__operators__.getitem_8[0
+                                                                    ][0]']                        
+                                                                                                  
+ tf.__operators__.getitem_9  (None, 1, 1, 2, 64)          0         ['tf.__operators__.add_1[0][0]
+  (SlicingOpLambda)                                                 ']                            
+                                                                                                  
+ tf.__operators__.getitem_1  (None, 1, 64)                0         ['dense_53[0][0]']            
+ 1 (SlicingOpLambda)                                                                              
+                                                                                                  
+ dense_54 (Dense)            (None, 1, 1, 2, 64)          4160      ['tf.__operators__.getitem_9[0
+                                                                    ][0]']                        
+                                                                                                  
+ tf.linalg.matmul_2 (TFOpLa  (None, 1, None, 1, 2)        0         ['tf.__operators__.getitem_11[
+ mbda)                                                              0][0]',                       
+                                                                     'dense_54[0][0]']            
+                                                                                                  
+ tf.math.truediv_1 (TFOpLam  (None, 1, None, 1, 2)        0         ['tf.linalg.matmul_2[0][0]']  
+ bda)                                                                                             
+                                                                                                  
+ tf.nn.softmax_1 (TFOpLambd  (None, 1, None, 1, 2)        0         ['tf.math.truediv_1[0][0]']   
+ a)                                                                                               
+                                                                                                  
+ tf.__operators__.getitem_1  (None, 1, 1, 2, 64)          0         ['tf.__operators__.add_1[0][0]
+ 0 (SlicingOpLambda)                                                ']                            
+                                                                                                  
+ tf.linalg.matmul_3 (TFOpLa  (None, 1, None, 1, 64)       0         ['tf.nn.softmax_1[0][0]',     
+ mbda)                                                               'tf.__operators__.getitem_10[
+                                                                    0][0]']                       
+                                                                                                  
+ tf.__operators__.getitem_1  (None, 64)                   0         ['transformer_layer_3[0][0]'] 
+ 2 (SlicingOpLambda)                                                                              
+                                                                                                  
+ tf.__operators__.getitem_1  (None, 64)                   0         ['tf.linalg.matmul_3[0][0]']  
+ 3 (SlicingOpLambda)                                                                              
+                                                                                                  
+ tf.concat_3 (TFOpLambda)    (None, 128)                  0         ['tf.__operators__.getitem_12[
+                                                                    0][0]',                       
+                                                                     'tf.__operators__.getitem_13[
+                                                                    0][0]']                       
+                                                                                                  
+ dense_55 (Dense)            (None, 256)                  33024     ['tf.concat_3[0][0]']         
+                                                                                                  
+ dense_56 (Dense)            (None, 256)                  65792     ['dense_55[0][0]']            
+                                                                                                  
+ output_layer (Dense)        (None, 9)                    2313      ['dense_56[0][0]']            
+                                                                                                  
+==================================================================================================
+Total params: 835017 (3.19 MB)
+Trainable params: 835017 (3.19 MB)
+Non-trainable params: 0 (0.00 Byte)
+__________________________________________________________________________________________________

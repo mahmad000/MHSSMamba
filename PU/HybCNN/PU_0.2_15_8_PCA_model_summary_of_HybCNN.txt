@@ -1,0 +1,33 @@
+Model: "HybCNN"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_4 (InputLayer)        [(None, 8, 8, 15, 1)]     0         
+                                                                 
+ conv3d_4 (Conv3D)           (None, 8, 8, 15, 8)       512       
+                                                                 
+ conv3d_5 (Conv3D)           (None, 8, 8, 15, 16)      5776      
+                                                                 
+ conv3d_6 (Conv3D)           (None, 8, 8, 15, 32)      13856     
+                                                                 
+ reshape_2 (Reshape)         (None, 8, 8, 480)         0         
+                                                                 
+ conv2d_10 (Conv2D)          (None, 8, 8, 64)          276544    
+                                                                 
+ flatten_2 (Flatten)         (None, 4096)              0         
+                                                                 
+ dense_18 (Dense)            (None, 256)               1048832   
+                                                                 
+ dropout_4 (Dropout)         (None, 256)               0         
+                                                                 
+ dense_19 (Dense)            (None, 128)               32896     
+                                                                 
+ dropout_5 (Dropout)         (None, 128)               0         
+                                                                 
+ dense_20 (Dense)            (None, 9)                 1161      
+                                                                 
+=================================================================
+Total params: 1379577 (5.26 MB)
+Trainable params: 1379577 (5.26 MB)
+Non-trainable params: 0 (0.00 Byte)
+_________________________________________________________________
