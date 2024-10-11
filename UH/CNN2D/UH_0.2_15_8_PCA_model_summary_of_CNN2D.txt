@@ -1,0 +1,31 @@
+Model: "CNN2D"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_4 (InputLayer)        [(None, 8, 8, 15)]        0         
+                                                                 
+ conv2d_6 (Conv2D)           (None, 8, 8, 8)           1088      
+                                                                 
+ conv2d_7 (Conv2D)           (None, 8, 8, 16)          1168      
+                                                                 
+ conv2d_8 (Conv2D)           (None, 8, 8, 32)          4640      
+                                                                 
+ conv2d_9 (Conv2D)           (None, 8, 8, 64)          18496     
+                                                                 
+ flatten_1 (Flatten)         (None, 4096)              0         
+                                                                 
+ dense_14 (Dense)            (None, 256)               1048832   
+                                                                 
+ dropout_2 (Dropout)         (None, 256)               0         
+                                                                 
+ dense_15 (Dense)            (None, 128)               32896     
+                                                                 
+ dropout_3 (Dropout)         (None, 128)               0         
+                                                                 
+ dense_16 (Dense)            (None, 15)                1935      
+                                                                 
+=================================================================
+Total params: 1109055 (4.23 MB)
+Trainable params: 1109055 (4.23 MB)
+Non-trainable params: 0 (0.00 Byte)
+_________________________________________________________________
