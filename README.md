@@ -4,9 +4,7 @@
 
 ## This demo is associated with [Multi-head Spatial-Spectral Mamba for Hyperspectral Image Classification](https://arxiv.org/abs/2408.01224), 2024.
 
-![MHSSMamba](https://github.com/user-attachments/assets/8ea9c04d-8556-49fa-83ab-15b16286b760)
-
-
+![MHSSMamba](https://github.com/user-attachments/assets/feda9113-fb5b-440d-b5d9-4fec8a7b32c9)
 
 # Hyperspectral datasets
 
