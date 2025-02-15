@@ -1,8 +1,8 @@
-## MHSSMamba (Code will appear Soon!)
+## MHSSMamba
 
-# [2024] Multi-head Spatial-Spectral Mamba for Hyperspectral Image Classification
+# Ahmad, M., Butt, M. H. F., Usama, M., Altuwaijri, H. A., Mazzara, M., Distefano, S., & Khan, A. M. (2025). Multi-head spatial-spectral mamba for hyperspectral image classification. Remote Sensing Letters, 16(4), 15–29. https://doi.org/10.1080/2150704X.2025.2461330
 
-## This demo is associated with [Multi-head Spatial-Spectral Mamba for Hyperspectral Image Classification](https://arxiv.org/abs/2408.01224), 2024.
+## This demo is associated with [Multi-head Spatial-Spectral Mamba for Hyperspectral Image Classification](https://www.tandfonline.com/doi/abs/10.1080/2150704X.2025.2461330), 2024.
 
 ![MHSSMamba](https://github.com/user-attachments/assets/feda9113-fb5b-440d-b5d9-4fec8a7b32c9)
 
